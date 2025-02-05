@@ -404,6 +404,9 @@ class VerifierOperator(Operator[VerifierOperatorInputs, Dict[str, Any]]):
     
 #####################################################
 # 6) DiversityOperator
+
+# measuring diversity based on where diversityscoring sensor nodes are place -> subjective & catered towared ai system
+
 #####################################################
 
 class DiversityScoringOperatorInputs(BaseModel):
