@@ -407,10 +407,11 @@ class VerifierOperator(Operator[VerifierOperatorInputs, Dict[str, Any]]):
 #####################################################
 
 class DiversityScoringOperatorInputs(BaseModel):
-    pass
+    measurement: List[str]
+    all_responses: List[str]
 
 class DiversityScoringOperatorOutputs(BaseModel):
-    pass
+    diversity_score: int
 
 class DiversityScoringSignature(Signature):
     pass
