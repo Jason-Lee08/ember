@@ -401,6 +401,23 @@ class VerifierOperator(Operator[VerifierOperatorInputs, Dict[str, Any]]):
         Typically, we have only one candidate_answer, so concurrency is not needed.
         """
         return None
+    
+#####################################################
+# 6) DiversityOperator
+#####################################################
+
+class DiversityScoringOperatorInputs(BaseModel):
+    pass
+
+class DiversityScoringOperatorOutputs(BaseModel):
+    pass
+
+class DiversityScoringSignature(Signature):
+    pass
+
+class DiversityScoringOperator(Operator[DiversityScoringOperatorInputs, Dict[str, Any]]):
+    pass
+
 
 #####################################################
 # Register everything
