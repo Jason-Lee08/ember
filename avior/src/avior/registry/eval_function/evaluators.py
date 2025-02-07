@@ -187,7 +187,26 @@ class CodeExecutionEvaluator(IEvaluator[str]):
                 is_correct=False,
                 score=0.0,
                 metadata={"error": str(e)}
-            )
+            )        
+class DiversityScoringEvaluator(IEvaluator[float]):
+    """
+    Evaluator to test ensemble outputs -> score them (float)
+    """
+    def evaluate(
+            self, 
+            system_output: List[str], 
+            **kwargs) -> EvaluationResult:
+        if system_output is None or len(system_output) == 0:
+            return EvaluationResult(is_correct=False, score=-1)
+
+        ratio = -1
+        # write compression ratio
+
+
+
+        return EvaluationResult(is_correct=True,score=ratio)
+    
+
 
 
 ##########################################################
