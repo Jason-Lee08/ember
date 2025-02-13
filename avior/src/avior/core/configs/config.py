@@ -37,6 +37,13 @@ class ConfigManager:
         # Ensure openai_api_key is present
         if "openai_api_key" not in self._config["models"]:
             self._config["models"]["openai_api_key"] = ""
+        # Ensure other model's keys are present
+        #   anthropic_api_key
+        if "anthropic_api_key" not in self._config["models"]:
+            self._config["models"]["anthropic_api_key"] = ""
+        #   google_api_key
+        if "google_api_key" not in self._config["models"]:
+            self._config["models"]["google_api_key"] = ""
 
         # Re-save if we added any new defaults
         self._save()
@@ -45,6 +52,8 @@ class ConfigManager:
         """Defines minimal default structure if config doesn't exist at all."""
         self._config["models"] = {
             "openai_api_key": "",
+            "anthropic_api_key": "",
+            "google_api_key": "",
         }
 
     def _save(self) -> None:
@@ -82,6 +91,19 @@ def initialize_api_keys() -> None:
     Loads or overrides model API keys from environment variables.
     Logs warnings if keys are missing.
     """
+
+     # Case to add all keys from config -> OS
+     # TODO: integrate this section below to have more clarity
+    if CONFIG.get("models", "openai_api_key") and os.environ.get('OPENAI_API_KEY') is None:
+        print("INFO - Adding OpenAI key in config.ini -> OS")
+        os.environ["OPENAI_API_KEY"] = CONFIG.get("models", "openai_api_key")
+    if CONFIG.get("models", "anthropic_api_key")  and os.environ.get('ANTHROPIC_API_KEY') is None:
+        print("INFO - Adding Anthropic key in config.ini -> OS")
+        os.environ["ANTHROPIC_API_KEY"] = CONFIG.get("models", "anthropic_api_key")
+    if CONFIG.get("models", "google_api_key") and os.environ.get('GOOGLE_API_KEY') is None:
+        print("INFO - Adding Google key in config.ini -> OS")
+        os.environ["GOOGLE_API_KEY"] =  CONFIG.get("models", "google_api_key")
+
     # 1) OpenAI
     openai_api_key = os.environ.get("OPENAI_API_KEY")
     if openai_api_key:

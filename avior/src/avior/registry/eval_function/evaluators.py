@@ -6,6 +6,7 @@ from typing import Any, Dict, Generic, TypeVar, Optional
 import subprocess
 import re
 
+import diversity # TODO: pip install diversity==0.2.0
 
 ##########################################################
 # 1) Core Data Structures & Interfaces
@@ -188,6 +189,7 @@ class CodeExecutionEvaluator(IEvaluator[str]):
                 score=0.0,
                 metadata={"error": str(e)}
             )        
+
 class DiversityScoringEvaluator(IEvaluator[float]):
     """
     Evaluator to test ensemble outputs -> score them (float)
