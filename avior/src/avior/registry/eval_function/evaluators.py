@@ -2,11 +2,11 @@
 from __future__ import annotations
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
-from typing import Any, Dict, Generic, TypeVar, Optional
+from typing import Any, List, Dict, Generic, TypeVar, Optional
 import subprocess
 import re
 
-import diversity # TODO: pip install diversity==0.2.0
+from diversity import compression_ratio # TODO: pip install diversity==0.2.0
 
 ##########################################################
 # 1) Core Data Structures & Interfaces
@@ -204,7 +204,7 @@ class DiversityScoringEvaluator(IEvaluator[float]):
         ratio = -1
         # write compression ratio
 
-
+        compression_ratio()
 
         return EvaluationResult(is_correct=True,score=ratio)
     
