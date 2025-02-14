@@ -201,10 +201,11 @@ class DiversityScoringEvaluator(IEvaluator[float]):
         if system_output is None or len(system_output) == 0:
             return EvaluationResult(is_correct=False, score=-1)
 
-        ratio = -1
-        # write compression ratio
-
-        compression_ratio()
+        # current compression ratio formula
+        # TODO: update scoring function to make it better
+        # -> like use token count
+        letter_sum = sum(len(response) for response in system_output)
+        ratio = compression_ratio(system_output) * min(1, len(system_output)/5) * min(1, letter_sum/100)
 
         return EvaluationResult(is_correct=True,score=ratio)
     
